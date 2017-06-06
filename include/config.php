@@ -2,8 +2,14 @@
     session_start();
     
     $server="localhost";
-    $username="aatma";
-    $password="aatma123";
+    // $username="aatma";
+    // $password="aatma123";
+    // $database="aatma";
+
+    $username="root";
+
+    $password="";
+
     $database="aatma";
 
      //sms related variables
