@@ -621,6 +621,140 @@ function imageCategoryList($obj)
     }
 }
 
+function blogList($obj)
+{
+
+    global $con;
+
+    $blog = array();
+
+    $query="SELECT * FROM blog ";
+
+    $query.=" WHERE ";
+
+    if (isset($obj->search) && !empty($obj->search))
+    {
+
+        $search = clean($obj->search);
+
+        //start string cleaning
+
+        $count=1;
+
+        while($count!=0)
+        {
+
+            $search=str_replace("  "," ", $search,$count);
+
+            //string is clean now
+
+            $keywords=explode(" ", $search);
+
+            $length=sizeof($keywords);
+
+            if($length!=0)
+            {
+                for($i=0;$i<$length;$i++)
+                {
+                    $query.="(blog_title like '%".$keywords[$i]."%') AND ";
+                }
+            // $query=substr($query, 0,strlen($query)-4);  // remove the last AND word
+
+            // $query.=" ORDER BY t.tour_id DESC limit {$start}, {$last}";    
+            }
+        }
+
+        // if(isset($obj->category))
+
+        // {
+
+        //   $category=$obj->category;
+
+        //   $query.=" b.blog_cat_id='".$category."' and ";
+
+        // }
+
+        // if(!isset($obj->viewall))
+
+        // {
+
+        //   $query.=" `status`=1 and ";
+
+        // }
+
+        // if (isset($obj->status) && $obj->status!="-2")
+        // {    
+        //   $query.=" status=".$obj->status." and ";
+        // }
+
+    }
+        
+    if(isset($obj->limit) && $obj->limit!=0)
+    {    
+        $limit=$obj->limit;
+    }    
+    else
+    {
+        $limit=10;
+    }
+
+
+
+    if(isset($obj->page) && $obj->page!=0)
+    {
+        $page=$obj->page;
+    }
+    else
+    {
+        $page=1;
+    }
+
+
+
+    $query.="1 group by blog_id order by blog_date desc limit {$limit} offset ".(($page-1)*$limit);
+
+    if (isset($obj->id) && !empty($obj->id))
+    {
+        $query="Select * from blog where blog_id =".$obj->id;
+    }
+
+    $result = mysqli_query($con,$query);
+
+
+
+
+
+    if(mysqli_num_rows($result) > 0)
+    {
+
+        $output='{"status":"success","blog":';
+
+        while ($row = mysqli_fetch_assoc($result)) 
+        {
+            $blog[] = $row;
+        }
+
+        $output.=json_encode($blog);
+
+        $output.='}';
+
+    }
+
+    else
+    {
+
+        $output='{"status":"failure","remark":"No blog found"}';
+    }
+
+                // $output.=$query;
+
+    return $output;
+    // return $query;
+
+}
+
+
+
 function imageList($obj)
 {
 	//if image_id is set, return detail of that image

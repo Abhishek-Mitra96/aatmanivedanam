@@ -4,7 +4,7 @@ require_once '../../include/config.php';
 // require_once '../../include/pagination.php';
 
   $obj=(object)$_REQUEST;
-  $output=blogDetails($obj);
+  $output=blogList($obj);
    echo $output;
  
  ?>

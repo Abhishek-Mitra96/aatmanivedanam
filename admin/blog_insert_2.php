@@ -35,7 +35,7 @@ if(isset($_POST['submit']))
         }
     }
 
-$cat_id=$_POST["category_id"];
+// $cat_id=$_POST["category_id"];
 
 // $vendor_id = $_POST['vendor_id'];
 // $country_id = $_POST['country_id'];
@@ -48,6 +48,7 @@ $description=$_POST['description'];
 // $details=$_POST['details'];
 // $start_location=$_POST['start_location'];
 $blog_date = date("Y-m-d");
+$pos = 0;
 //echo $img1."image<br>";
 // $net_amount=netRate($price,$discount);
 
@@ -55,11 +56,11 @@ $blog_date = date("Y-m-d");
 //check upload tour limit end   
     
 $query="INSERT INTO `blog`"
-        . " (`blog_cat_id`, `blog_image`, "
-        . "`title`, `status`, `date`, `description`)"
+        . " (`blog_title`, `blog_description`, "
+        . "`blog_img` , `blog_pos`, `status`, `blog_date`)"
         . " VALUES"
-        . " ('{$cat_id}', '{$img1}',"
-        . " '{$blog_title}', '{$visibility}', '{$blog_date}', '{$description}');";
+        . " ('{$blog_title}', '{$description}',"
+        . " '{$img1}', '{$pos}', '{$visibility}', '{$blog_date}');";
 
         
   $result=mysqli_query($con,$query);

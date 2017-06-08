@@ -6,7 +6,7 @@ admincheck();
 
 $id = $_REQUEST['id'];
     
-$query="SELECT `blog_image` FROM `blog` WHERE `blog_id`={$id}";
+$query="SELECT `blog_img` FROM `blog` WHERE `blog_id`={$id}";
 
 $result    =   mysqli_query($con,$query);
 $row   =  mysqli_fetch_array($result);

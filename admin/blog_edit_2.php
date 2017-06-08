@@ -4,11 +4,11 @@ include_once '../include/config.php';
 
     $id=$_POST['blog_id'];
 
-    $query="select `blog_image` from `blog` where `blog_id`=".$id;
+    $query="select `blog_img` from `blog` where `blog_id`=".$id;
     $result=mysqli_query($con,$query);
     $row=mysqli_fetch_array($result);
     // error_log($query);
-    $img=$row["blog_image"];
+    $img=$row["blog_img"];
 
     if(!file_exists($_FILES['img1']['tmp_name']) || !is_uploaded_file($_FILES['img1']['tmp_name'])) 
     {
@@ -52,7 +52,7 @@ include_once '../include/config.php';
 // $id=$_POST['id'];
 // $parent_id=$_POST['parent_id'];
 $blog_title=$_POST['blog_title'];
-$cat_id=$_POST['cat_id'];
+// $cat_id=$_POST['cat_id'];
 $description=$_POST['description'];
 //$full_description=$_POST['full_description'];
 //$category_image=$_POST['category_image'];
@@ -66,10 +66,9 @@ $status=$_POST['visibility'];
 
     
     $query="UPDATE `blog` SET "
-            . "`title` = '{$blog_title}', "
-            . "`blog_image` = '{$blog_image}', "
-            . "`blog_cat_id` = '{$cat_id}', "
-            . "`description` = '{$description}', "
+            . "`blog_title` = '{$blog_title}', "
+            . "`blog_img` = '{$blog_image}', "
+            . "`blog_description` = '{$description}', "
             . "`status` = '{$status}' "
             . "WHERE "
             . "`blog_id` = {$id};";

@@ -9,7 +9,7 @@ $obj=new stdClass();
 
 $obj->nolimit=1;
 $obj->viewall=1;
-$data=json_decode(blogcategoryList($obj));
+// $data=json_decode(blogcategoryList($obj));
 ?>
  <style>
    .error{
@@ -50,24 +50,24 @@ $data=json_decode(blogcategoryList($obj));
                              </div>
                     </div>
                     
-                     <div class="form-group">
+                    <!--  <div class="form-group">
                         <label class="col-sm-2 control-label">Category</label>
-                        <div class="col-sm-6" id="category_primary">
+                        <div class="col-sm-6" id="category_primary"> -->
                         <?php
 
-                            if($data->status=="success")
-                            {
-                              echo '<select class="form-control" id="primary_category_id" name="category_id">';
+                            // if($data->status=="success")
+                            // {
+                            //   echo '<select class="form-control" id="primary_category_id" name="category_id">';
 
-                              for($i=0;$i<sizeof($data->categories);$i++)
-                              {
-                                echo '<option value= "'.$data->categories[$i]->blog_cat_id.'">'.$data->categories[$i]->category_name.'</option>';
-                              }
-                              echo '</select>';
-                            }
+                            //   for($i=0;$i<sizeof($data->categories);$i++)
+                            //   {
+                            //     echo '<option value= "'.$data->categories[$i]->blog_cat_id.'">'.$data->categories[$i]->category_name.'</option>';
+                            //   }
+                            //   echo '</select>';
+                            // }
                             ?>
-                        </div>
-                    </div>
+                       <!--  </div>
+                    </div> -->
 
                     <div class="form-group">
                             <label  class="col-sm-2 control-label">Blog Image</label>
@@ -182,20 +182,20 @@ function blog_details(){
 
 function print_data(fetchdata)
     {
-    // console.log(fetchdata);
+    console.log(fetchdata);
     var arr = JSON.parse(fetchdata,true);
     var x;
     
     if(arr.status=="success")
     {       
     
-    for(x=0;x<arr.blogs.length;x++)
+    for(x=0;x<arr.blog.length;x++)
         {
-            $("#blog_title").val(arr.blogs[x].title);
-            $("#description").val(arr.blogs[x].description);
-            $("#blog_image").attr("src",arr.blogs[x].blog_image);
-            $("#visibility").val(arr.blogs[x].status);
-            $("#primary_category_id").val(arr.blogs[x].blog_cat_id);
+            $("#blog_title").val(arr.blog[x].blog_title);
+            $("#description").val(arr.blog[x].blog_description);
+            $("#blog_image").attr("src",arr.blog[x].blog_img);
+            $("#visibility").val(arr.blog[x].status);
+            // $("#primary_category_id").val(arr.blogs[x].blog_cat_id);
         }
      
     }

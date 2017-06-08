@@ -9,7 +9,7 @@ $obj=new stdClass();
 
 $obj->nolimit=1;
 $obj->viewall=1;
-$data=json_decode(blogcategoryList($obj));
+// $data=json_decode(blogcategoryList($obj));
 // print_r($vendors);
 ?>
  <style>
@@ -40,24 +40,24 @@ $data=json_decode(blogcategoryList($obj));
                     
                 <div class="form-horizontal">
 
-                      <div class="form-group">
+                     <!--  <div class="form-group">
                             <label  class="col-sm-2 control-label">Blog Category</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6"> -->
                             <?php
 
-                            if($data->status=="success")
-                            {
-                              echo '<select class="form-control" id="category_id" name="category_id">';
+                            // if($data->status=="success")
+                            // {
+                            //   echo '<select class="form-control" id="category_id" name="category_id">';
 
-                              for($i=0;$i<sizeof($data->categories);$i++)
-                              {
-                                echo '<option value= "'.$data->categories[$i]->blog_cat_id.'">'.$data->categories[$i]->category_name.'</option>';
-                              }
-                              echo '</select>';
-                            }
+                            //   for($i=0;$i<sizeof($data->categories);$i++)
+                            //   {
+                            //     echo '<option value= "'.$data->categories[$i]->blog_cat_id.'">'.$data->categories[$i]->category_name.'</option>';
+                            //   }
+                            //   echo '</select>';
+                            // }
                             ?>
-                             </div>
-                      </div>
+                             <!-- </div>
+                      </div> -->
 
                       <div class="form-group">
                             <label  class="col-sm-2 control-label">Blog Title</label>

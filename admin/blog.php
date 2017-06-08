@@ -133,7 +133,7 @@ function search_blog(){
        
         $.ajax({
             type: 'POST',
-            url: '../commonapi/blog/list.php',
+            url: '../userAPI/blog/blog_list.php',
             data: {
                 search:searchkey,
                 status:status,
@@ -172,7 +172,7 @@ function search_blog(){
      
       //out+='<th>Vendor</th>';
       out+='<th>Blog Image </th>';
-      out+='<th>Category</th>';
+      // out+='<th>Category</th>';
      // out+='<th> description</th>';&
       out+='<th>Date </th>';
       // out+='<th>COD</th>';
@@ -192,14 +192,14 @@ function search_blog(){
                   
           out+="<tr>";  
         
-          out+="<td style='margin-left:10px'><a href='tour_details.php?id="+arr.blog[x].blog_id+"'>"+arr.blog[x].title+"</a></td>";
+          out+="<td style='margin-left:10px'><a href='tour_details.php?id="+arr.blog[x].blog_id+"'>"+arr.blog[x].blog_title+"</a></td>";
           //out+="<td style='margin-left:10px'>"+arr.tours[x].vendor_name+"</td>";
           if(arr.blog[x].blog_image!="")
             out+="<td><img class='lazy' data-original="+arr.blog[x].blog_image+" height='50px' width='80px'></td>";
           else
             out+="<td></td>";
-          out+="<td>"+arr.blog[x].category_name+"</td>";
-          out+="<td>"+arr.blog[x].date+"</td>";
+          // out+="<td>"+arr.blog[x].category_name+"</td>";
+          out+="<td>"+arr.blog[x].blog_date+"</td>";
           // out+="<td>"+arr.tours[x].cod_availability+"</td>";
           // out+="<td>"+arr.tours[x].net_amount+"</td>";
           // out+="<td>"+arr.tours[x].standard_packing+"</td>";
