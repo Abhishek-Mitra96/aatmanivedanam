@@ -941,6 +941,7 @@ function audioList($obj)
         }
         $output.='}';
         return $output;
+        // return $query;
     }else{
         //somthing problem with query
         return '{"status":"failure","remark":"somthing problem with the query", "query":"'.$query.'"}';
@@ -1162,6 +1163,202 @@ function wishlistUser($user_id)
         return '{"status":"failure","remark":"Invalid or incomplete user id recieved"}';
     }
 }
+
+
+//*******************************************for slider_top********************
+function slider_top_list($obj)
+{
+    if(isset($obj->search)){
+                
+                global $con;
+                $top_list=array();
+
+                
+                $query="select v.*, c.name as 'image_name',c.status as 'image_status' from `slider_top` v join `image` c where v.img_id=c.image_id and v.status=1 and";
+
+                
+                if(isset($obj->search) && $obj->search!=""){
+                     $search=clean($obj->search);
+                     $count=1;
+                     while($count!=0)
+                         $search=str_replace("  "," ", $search,$count);
+                    
+                     $keywords=explode(" ", $search);
+                     $length=sizeof($keywords);
+                     if($length!=0)
+                     {
+                         for($i=0;$i<$length;$i++)
+                         {
+                             $query.=" (c.`name` like '%".$keywords[$i]."%')";
+                         }
+                     }
+                 }
+
+                
+                //for limit
+                if(isset($obj->limit) && $obj->limit!=0)
+                    $limit=$obj->limit;
+                else
+                    $limit=10;
+
+                //for page
+                if(isset($obj->page) && $obj->page!=0)
+                    $page=$obj->page;
+                else
+                    $page=1;
+
+                //$query.=" order by `slider_top_id` desc limit {$limit} offset ".(($page-1)*$limit);
+                $result=mysqli_query($con,$query);
+                $rowcount=mysqli_num_rows($result);
+                if($rowcount>0){
+                    while($row=mysqli_fetch_assoc($result)){
+                        //$row["category_name"]="Uncategory";
+                        $top_list[]=$row;
+                    }
+                    return '{"status":"success", "slider_top_list":'.json_encode($top_list).'}';
+                }
+                else{
+                    $a='{"status":"Image not in slider_top"}';
+                    echo $a;
+                }
+                
+
+
+    }
+    else{
+
+                
+                global $con;
+                $top_list=array();
+
+                // $query="select * from `slider_top` ";
+                $query="select v.*, c.name as 'image_name',c.status as 'image_status' from `slider_top` v join `image` c where v.img_id=c.image_id and v.status=1";
+
+                
+
+                //for limit
+                if(isset($obj->limit) && $obj->limit!=0)
+                    $limit=$obj->limit;
+                else
+                    $limit=10;
+
+                //for page
+                if(isset($obj->page) && $obj->page!=0)
+                    $page=$obj->page;
+                else
+                    $page=1;
+
+                //$query.=" order by `slider_top_id` desc limit {$limit} offset ".(($page-1)*$limit);
+                $result=mysqli_query($con,$query);
+                while($row=mysqli_fetch_assoc($result)){
+                    //$row["category_name"]="Uncategory";
+                    $top_list[]=$row;
+                }
+                return '{"status":"success", "slider_top_list":'.json_encode($top_list).'}';
+            }
+}
+
+
+
+
+
+//*******************************************for slider_bottom********************
+function slider_bottom_list($obj)
+{
+    if(isset($obj->search)){
+                
+                global $con;
+                $bottom_list=array();
+
+                
+                $query="select v.*, c.name as 'image_name',c.status as 'image_status' from `slider_bottom` v join `image` c where v.img_id=c.image_id and v.status=1 and";
+
+                
+                if(isset($obj->search) && $obj->search!=""){
+                     $search=clean($obj->search);
+                     $count=1;
+                     while($count!=0)
+                         $search=str_replace("  "," ", $search,$count);
+                    
+                     $keywords=explode(" ", $search);
+                     $length=sizeof($keywords);
+                     if($length!=0)
+                     {
+                         for($i=0;$i<$length;$i++)
+                         {
+                             $query.=" (c.`name` like '%".$keywords[$i]."%')";
+                         }
+                     }
+                 }
+
+                
+                //for limit
+                if(isset($obj->limit) && $obj->limit!=0)
+                    $limit=$obj->limit;
+                else
+                    $limit=10;
+
+                //for page
+                if(isset($obj->page) && $obj->page!=0)
+                    $page=$obj->page;
+                else
+                    $page=1;
+
+                //$query.=" order by `slider_top_id` desc limit {$limit} offset ".(($page-1)*$limit);
+                $result=mysqli_query($con,$query);
+                $rowcount=mysqli_num_rows($result);
+                if($rowcount>0){
+                    while($row=mysqli_fetch_assoc($result)){
+                        //$row["category_name"]="Uncategory";
+
+                        $bottom_list[]=$row;
+                    }
+                    return '{"status":"success", "slider_bottom_list":'.json_encode($bottom_list).'}';
+                }
+                else{
+                    $a='{"status":"Image not in slider_bottom"}';
+                    echo $a;
+                }
+
+    }
+    else{
+
+                
+                global $con;
+                $bottom_list=array();
+
+                // $query="select * from `slider_top` ";
+                $query="select v.*, c.name as 'image_name',c.status as 'image_status' from `slider_bottom` v join `image` c where v.img_id=c.image_id and v.status=1";
+
+                
+
+                //for limit
+                if(isset($obj->limit) && $obj->limit!=0)
+                    $limit=$obj->limit;
+                else
+                    $limit=10;
+
+                //for page
+                if(isset($obj->page) && $obj->page!=0)
+                    $page=$obj->page;
+                else
+                    $page=1;
+
+                //$query.=" order by `slider_top_id` desc limit {$limit} offset ".(($page-1)*$limit);
+                $result=mysqli_query($con,$query);
+                while($row=mysqli_fetch_assoc($result)){
+                    //$row["category_name"]="Uncategory";
+                    $bottom_list[]=$row;
+                }
+                return '{"status":"success", "slider_bottom_list":'.json_encode($bottom_list).'}';
+            }
+}
+
+
+
+
+
+
 
 //********************************************for similer product
 /*function similarProduct($table,$product_id)
